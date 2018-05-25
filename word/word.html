@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>word</title>
+</head>
+<body>
+    1.1 目标：每天可以写的笔记页面
+    1.2 功能：
+        1.九宫格显示日期
+            1.1.日期天气
+        2.开心的事
+        3.运动
+        4.年月日计划
+            4.1.年计，总结
+            4.2.季计，总结
+            4.3.月计，总结
+            4.4.周计，总结
+            4.5.日计，总结
+            4.6.计划表，
+            4.7.计划倒数
+            4.8.计划箱
+        5.饭
+            5.1 饭量
+            5.2 菜
+        6.金钱
+            6.1 金钱倒数
+            6.2 用了多少
+        7.1万小时
+            7.1 只有一个
+            7.2 番茄计算
+            7.3 番茄钟
+            7.4 奖励箱
+        8.习惯打卡
+            8.1 两到三个
+        9.关心的人
+        10.可用手机写，电脑服务器同步
+        11.登录
+            11.1 修改
+            11.2 看以前的日记
+    1.3 jsp+javaBean+database
+        3.1 jsp表现
+        3.2 javaBean罗辑
+        3.3 database数据
+    1.4 服务器一台
+    1.5 tomcat,mysql
+
+    2.1 用户类
+        ID,name,password,经验，等级
+        增，删，改，查
+    2.2 记录类
+        date,开心的事，运动，计划，饭，金钱，1万，习惯，关心
+        增，删，改，查
+    2.3 计划类
+        id，name，总结，计划所用番茄，完成所用番茄，根计划，父计划，子计划数，有没完成，等级
+        增，删，改，查
+    2.5 奖励箱
+        name，价格，数量，
+        增，删，改，查
+    2.6 番茄钟
+        计划，钟，番茄时间，休息时间，音乐
+    2.7 1万小时
+        计划，计算，番茄
+    2.8 计算
+        name，总数，现数
+        倒数，叠加
+
+    3.1 记录表
+        create database Diary DEFAULT CHARACTER SET utf8;
+        use Diary;
+        create table Diary(
+        diary date not null key,
+        happy varchar(255),
+        motion varchar(255),
+        plan text,
+        reward text,
+        food varchar(255),
+        balance decimal(7,2),
+        use_money decimal(7,2),
+        habit varchar(255),
+        care_for varchar(255)
+        );
+
+    insert into Diary values("2018-5-15", "B站", "跑", "学习", null, null, 4000.00, 5.00, null, null);
+    insert into Diary values("2018-5-16", "B站", "跑", "学习", null, null, 3995.00, 5.00, null, null);
+    insert into Diary values("2018-5-17", "B站", "跑", "学习", null, null, 3990.00, 5.00, null, null);
+    insert into Diary values("2018-5-18", "B站", "跑", "学习", null, null, 3985.00, 5.00, null, null);
+    insert into Diary values("2018-5-19", "B站", "跑", "学习", null, null, 3980.00, 5.00, null, null);
+    insert into Diary values("2018-5-20", "B站", "跑", "学习", null, null, 3975.00, 5.00, null, null);
+    insert into Diary values("2018-5-21", "B站", "跑", "学习", null, null, 3970.00, 5.00, null, null);
+    insert into Diary values("2018-5-22", "B站", "跑", "学习", null, null, 3965.00, 5.00, null, null);
+
+    3.2 计划表
+        create table Plan(
+            id int not null auto_increment primary key,
+            name varchar(255) not null,
+            plan_tomato int,
+            finish_tomato int,
+            rood_id int null,
+            pid int not null,
+            son int,
+            finish int,
+            level int
+        );
+    insert into Plan values(null, "学习", 200, 0, 1 , 1, 3, 1, 1);
+    insert into Plan values(null, "学习java", 150, 0, 1 , 1, 0, 1, 1);
+    insert into Plan values(null, "学习linux", 20, 0, 1 , 1, 0, 1, 1);
+    insert into Plan values(null, "学习mysql", 30, 0, 1 , 1, 0, 1, 1);
+
+    3.3 奖励表
+        create table Reward(
+            id int not null auto_increment primary key,
+            name varchar(255) not null,
+            price int,
+            num int,
+            level int
+        );
+    insert into Reward values(null, "跑鞋", 25, 1, 3);
+    insert into Reward values(null, "夏上", 10, 1, 2);
+    insert into Reward values(null, "夏下", 15, 1, 2);
+    insert into Reward values(null, "跑点带", 25, 0, 3);
+    insert into Reward values(null, "套套", 50, 0, 5);
+
+
+    3.4 番茄表
+        create table Tomato(
+            id int not null auto_increment primary key,
+            name varchar(255) not null,
+            plan_id int not null,
+            tomato_time time not null,
+            rest_time time not null,
+            song varchar(255)
+        );id，name，计划，钟，番茄时间，休息时间，音乐
+    insert into Tomato values(null, 2, "00:25:00", "00:05:00", "/home/dong/IdeaProjects/word/rain.mp3", 1);
+    insert into Tomato values(null, 3, "00:25:00", "00:05:00", "/home/dong/IdeaProjects/word/rain.mp3", 1);
+
+    3.5 用户表
+        create table User(
+            id int not null auto_increment primary key,
+            username varchar(30) not null,
+            password varchar(30) not null,
+            experience int not null,
+            level int
+        )
+    insert into User values(null, "dong", "dong", 0, 1);
+
+
+        ?
+
+</body>
+</html>
